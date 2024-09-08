@@ -16,4 +16,11 @@ export class FoodTruckRepository implements IFoodTruckRepository {
       relations: ["comments"],
     });
   }
+
+  async findById(id: string): Promise<FoodTruck | undefined> {
+    return await this.foodTruckRepository.findOne({
+      where: { id },
+      relations: ["comments"],
+    });
+  }
 }

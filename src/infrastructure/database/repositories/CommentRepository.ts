@@ -3,6 +3,7 @@ import { ICommentRepository } from "../../../domain/repositories/ICommentReposit
 import { CommentEntity } from "../../entities/CommentEntity";
 import { AppDataSource } from "..";
 import { Comment } from "../../../domain/entities/Comment";
+import { FoodTruck } from "../../../domain/entities/FoodTruck";
 
 export class CommentRepository implements ICommentRepository {
   private commentRepository: Repository<CommentEntity>;
@@ -13,5 +14,14 @@ export class CommentRepository implements ICommentRepository {
 
   async findAllByFoodTruckId(foodTruckId: string): Promise<Comment[]> {
     return await this.commentRepository.find({ where: { foodTruckId } });
+  }
+
+  async create(foodTruck: FoodTruck, comment: Comment) {
+    await this.commentRepository.save({
+      ...comment,
+      foodTruck,
+    });
+
+    return comment;
   }
 }
