@@ -8,8 +8,15 @@ export class FoodTruckController {
     const repository = new FoodTruckRepository();
     const useCase = new GetFoodTrucksUseCase(repository);
 
+    const limit = req.query.limit
+      ? parseInt(req.query.limit as string)
+      : undefined;
+    const offset = req.query.offset
+      ? parseInt(req.query.offset as string)
+      : undefined;
+
     try {
-      const foodTrucks = await useCase.execute();
+      const foodTrucks = await useCase.execute(limit, offset);
       res.status(200).json(foodTrucks);
     } catch (error) {
       res.status(400).json({ error: error.message });

@@ -17,12 +17,10 @@ export class CommentRepository implements ICommentRepository {
   }
 
   async create(foodTruck: FoodTruck, comment: Comment) {
-    await this.commentRepository.save({
+    return await this.commentRepository.save({
       ...comment,
       foodTruck,
     });
-
-    return comment;
   }
 
   async delete(id: string): Promise<void> {

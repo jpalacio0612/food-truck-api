@@ -4,7 +4,10 @@ import { IFoodTruckRepository } from "../../domain/repositories/IFoodTruckReposi
 export class GetFoodTrucksUseCase {
   constructor(private foodTruckRepository: IFoodTruckRepository) {}
 
-  async execute(): Promise<FoodTruck[]> {
-    return this.foodTruckRepository.findAll();
+  async execute(
+    limit: number | undefined,
+    offset: number | undefined
+  ): Promise<FoodTruck[]> {
+    return this.foodTruckRepository.findAll(limit, offset);
   }
 }

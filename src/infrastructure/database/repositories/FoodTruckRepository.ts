@@ -11,7 +11,18 @@ export class FoodTruckRepository implements IFoodTruckRepository {
     this.foodTruckRepository = AppDataSource.getRepository(FoodTruckEntity);
   }
 
-  async findAll(): Promise<FoodTruck[]> {
+  async findAll(
+    limit: number | undefined,
+    offset: number | undefined
+  ): Promise<FoodTruck[]> {
+    if (limit && offset !== undefined) {
+      return await this.foodTruckRepository.find({
+        relations: ["comments"],
+        take: limit,
+        skip: offset,
+      });
+    }
+
     return await this.foodTruckRepository.find({
       relations: ["comments"],
     });
