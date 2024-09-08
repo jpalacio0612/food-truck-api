@@ -3,6 +3,7 @@ import { GetCommentsByFoodTruckId } from "../../application/use-cases/GetComment
 import { CommentRepository } from "../database/repositories/CommentRepository";
 import { FoodTruckRepository } from "../database/repositories/FoodTruckRepository";
 import { CreateCommentUseCase } from "../../application/use-cases/CreateCommentUseCase";
+import { DeleteCommentUseCase } from "../../application/use-cases/DeleteCommentUseCase";
 
 export class CommentController {
   static async getAllByFoodTruckId(req: Request, res: Response) {
@@ -32,6 +33,20 @@ export class CommentController {
     try {
       const comment = await useCase.execute(foodTruckId, body);
       res.status(201).json(comment);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
+
+  static async delete(req: Request, res: Response) {
+    const repository = new CommentRepository();
+    const useCase = new DeleteCommentUseCase(repository);
+
+    const { id } = req.params;
+
+    try {
+      await useCase.execute(id);
+      res.status(204).send();
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
