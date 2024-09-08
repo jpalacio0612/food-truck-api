@@ -12,6 +12,8 @@ export class FoodTruckRepository implements IFoodTruckRepository {
   }
 
   async findAll(): Promise<FoodTruck[]> {
-    return await this.foodTruckRepository.find();
+    return await this.foodTruckRepository.find({
+      relations: ["comments"],
+    });
   }
 }
