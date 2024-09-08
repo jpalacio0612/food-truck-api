@@ -1,6 +1,7 @@
-import { Entity, PrimaryColumn, Column } from "typeorm";
+import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
+import { CommentEntity } from "./CommentEntity";
 
-@Entity("food_truck")
+@Entity("food_trucks")
 export class FoodTruckEntity {
   @PrimaryColumn()
   id: string;
@@ -19,4 +20,7 @@ export class FoodTruckEntity {
 
   @Column()
   location: string;
+
+  @OneToMany(() => CommentEntity, (comment) => comment.foodTruck)
+  comments: CommentEntity[];
 }

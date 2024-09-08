@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
 import { FoodTruckEntity } from "../entities/FoodTruckEntity";
+import { CommentEntity } from "../entities/CommentEntity";
 
 export const AppDataSource = new DataSource({
   type: process.env.DB_TYPE as never,
@@ -10,5 +11,5 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: process.env.DB_SYNCHRONIZE === "true",
   logging: process.env.DB_LOGGING === "true",
-  entities: [FoodTruckEntity],
+  entities: [FoodTruckEntity, CommentEntity],
 });

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { GetFoodTrucksUseCase } from "../../application/GetFoodTrucksUseCase";
+import { GetFoodTrucksUseCase } from "../../application/use-cases/GetFoodTrucksUseCase";
 import { FoodTruckRepository } from "../database/repositories/FoodTruckRepository";
 
 export class FoodTruckController {

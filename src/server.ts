@@ -4,6 +4,7 @@ import * as express from "express";
 import { Request, Response } from "express";
 import * as cors from "cors";
 import foodTruckRoutes from "./infrastructure/routes/foodTruckRoutes";
+import commentRoutes from "./infrastructure/routes/commentRoutes";
 import { AppDataSource } from "./infrastructure/database";
 
 const PORT = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ AppDataSource.initialize()
     app.use(express.json());
     app.use(cors());
     app.use("/api", foodTruckRoutes);
+    app.use("/api", commentRoutes);
 
     app.get("/", (req: Request, res: Response) => {
       res.send("Hello World!");
