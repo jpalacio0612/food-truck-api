@@ -14,9 +14,10 @@ export class FoodTruckController {
     const offset = req.query.offset
       ? parseInt(req.query.offset as string)
       : undefined;
+    const search = req.query.search as string | undefined;
 
     try {
-      const foodTrucks = await useCase.execute(limit, offset);
+      const foodTrucks = await useCase.execute(limit, offset, search);
       res.status(200).json(foodTrucks);
     } catch (error) {
       res.status(400).json({ error: error.message });

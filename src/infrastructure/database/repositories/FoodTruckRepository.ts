@@ -2,7 +2,7 @@ import { IFoodTruckRepository } from "../../../domain/repositories/IFoodTruckRep
 import { FoodTruckEntity } from "../../entities/FoodTruckEntity";
 import { FoodTruck } from "../../../domain/entities/FoodTruck";
 import { AppDataSource } from "..";
-import { Repository } from "typeorm";
+import { ILike, Repository } from "typeorm";
 
 export class FoodTruckRepository implements IFoodTruckRepository {
   private foodTruckRepository: Repository<FoodTruckEntity>;
@@ -13,18 +13,25 @@ export class FoodTruckRepository implements IFoodTruckRepository {
 
   async findAll(
     limit: number | undefined,
-    offset: number | undefined
+    offset: number | undefined,
+    search: string | undefined
   ): Promise<FoodTruck[]> {
     if (limit && offset !== undefined) {
       return await this.foodTruckRepository.find({
         relations: ["comments"],
         take: limit,
         skip: offset,
+        where: {
+          applicant: search ? ILike(`${search}%`) : ILike("%"),
+        },
       });
     }
 
     return await this.foodTruckRepository.find({
       relations: ["comments"],
+      where: {
+        applicant: search ? ILike(`${search}%`) : ILike("%"),
+      },
     });
   }
 

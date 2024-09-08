@@ -6,8 +6,9 @@ export class GetFoodTrucksUseCase {
 
   async execute(
     limit: number | undefined,
-    offset: number | undefined
+    offset: number | undefined,
+    search: string | undefined
   ): Promise<FoodTruck[]> {
-    return this.foodTruckRepository.findAll(limit, offset);
+    return this.foodTruckRepository.findAll(limit, offset, search);
   }
 }
