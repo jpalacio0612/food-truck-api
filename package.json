@@ -5,13 +5,15 @@
   "scripts": {
     "build": "tsc",
     "start": "ts-node ./src/server.ts",
-    "dev": "nodemon ./src/server.ts"
+    "dev": "nodemon ./src/server.ts",
+    "seed": "ts-node ./src/infrastructure/database/seeds/seedFoodTruck.ts"
   },
   "author": "jpalacio0612",
   "license": "MIT",
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "pg": "^8.12.0",
