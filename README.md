@@ -25,7 +25,7 @@ Once the architecture was defined, I thought that typescript, being a super set 
 
 ## Postgres & TypeORM
 
-Postgres is a database that I have experience with and it adapts well to what I had in mind. I also decided to use it with TypeORM to use the tools it has to improve the development experience.
+Postgres is a SQL database that I have experience with and it adapts well to what I had in mind. I also decided to use it with TypeORM to use the tools it has to improve the development experience.
 
 ### Database Design
 
@@ -46,7 +46,7 @@ Postgres is a database that I have experience with and it adapts well to what I 
 ## Thinks I would like to improve or add with more time
 
 - Add a user entity to the database to associate comments with users. Implement authentication and authorization using JWT.
-- Add unit and integration tests for the services and controllers to ensure the code works as expected, take advantage of the clean architecture to make it easier to test, I can decouple the business logic from the external systems and mock dependencies. Also implement an testing database to run the tests.
+- Add more unit and integration tests for the services and controllers to ensure the code works as expected, take advantage of the clean architecture to make it easier to test, I can decouple the business logic from the external systems and mock dependencies. Also implement an testing database to run the tests.
 
 ## Technologies
 
@@ -70,18 +70,20 @@ To get started with the Food Truck Server, follow these steps:
 
 1. Clone this repository to your local machine.
 2. Navigate to the project directory.
-3. Delete .sample from .env.sample and fill in the required environment variables.
+3. Delete .sample from .env.sample and fill in the required environment variables. Make sura that you have a postgres database created and the connection is correct.
 4. Install the required dependencies by running `npm install`.
 5. Run the seed script to populate the database with sample data by running `npm run seed`.
 6. Start the server by running `npm dev`.
 
-## Building for production
+## Building and Deploy for production (CI/CD)
 
-To build the project for production, run the following command:
+Execute the following commands in order in your pipeline in order to deploy the server:
 
-```bash
-npm run build
-```
+1. Add the required environment variables to the server.
+2. Install the required dependencies by running `npm install`.
+3. Run linting and tests by running `npm run lint` and `npm run test`.
+4. Run the seed script to populate the database with sample data by running `npm run seed`.
+5. Build the project for production by running `npm run build`.
 
 This will compile the TypeScript code into JavaScript and output it to the `dist` directory. You can serve that build code in whatever environment you choose, remembering to set the required environment variables.
 
